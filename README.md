@@ -2,16 +2,69 @@
 
 # Product Backlog Inicial para SportsCT
 
-Este es el Product Backlog inicial para el proyecto SportsCT, una plataforma web colaborativa para centralizar eventos deportivos en Catamarca, Argentina. El backlog incluye historias de usuarios priorizadas para el MVP (Minimum Viable Product), con estimaciones en Story Points y dependencias.
+## Sprint 1: Fundaciones y Panel de Admin
+### Historia 1: Sistema de Autenticación Base
+**Prioridad:** Crítica | **SP:** 8
 
-| ID | Historia de Usuario                                                                                       | Prioridad | Estimación (SP) | Dependencias |
-|----|----------------------------------------------------------------------------------------------------------|-----------|-----------------|--------------|
-| 1  | **Nombre**: Registro de Usuario General<br><br>**Descripción**:<br>- Nombre Historia: Registro de Usuario General<br>- Como usuario general,<br>- Puedo registrarme con email y contraseña,<br>- Para acceder a funciones personalizadas como comentarios.<br><br>- Criterios de Aceptación:<br>  - Dado que estoy en la página de registro,<br>  - Cuando completo el formulario con campos: email, contraseña, nombre,<br>  - Entonces se valida el email como único y se envía un email de confirmación.<br><br>**Conversación (al reverso)**:<br>- Detalles:<br>  - Reglas de negocio: El email debe ser único; el registro requiere confirmación.<br>  - Requerimientos no funcionales: Tiempo de respuesta del formulario < 2 segundos; compatible con dispositivos móviles.<br>  - Otros detalles importantes: Soporte opcional para login con Google/Facebook.<br><br>**Comprobación**: (Se verificará tras desarrollo: formulario funcional, email enviado, acceso permitido tras confirmación.) | Alta       | 5               | Ninguna      |
-| 2  | **Nombre**: Registro de Organizador<br><br>**Descripción**:<br>- Nombre Historia: Registro de Organizador<br>- Como organizador,<br>- Puedo registrarme con credenciales adicionales (ej. nombre de club),<br>- Para poder cargar eventos.<br><br>- Criterios de Aceptación:<br>  - Dado que estoy en la página de registro,<br>  - Cuando completo campos extra: afiliación (club/federación),<br>  - Entonces se envía una notificación a admin para aprobación manual.<br><br>**Conversación (al reverso)**:<br>- Detalles:<br>  - Reglas de negocio: La aprobación debe ser manual por admin; diferenciación de roles en la base de datos.<br>  - Requerimientos no funcionales: Seguridad en datos sensibles (encriptación); interfaz responsive.<br>  - Otros detalles importantes: Notificación al organizador tras aprobación.<br><br>**Comprobación**: (Se verificará tras desarrollo: registro completo, notificación enviada, rol asignado tras aprobación.) | Alta       | 5               | ID 1         |
-| 3  | **Nombre**: Carga de Evento por Organizador<br><br>**Descripción**:<br>- Nombre Historia: Carga de Evento por Organizador<br>- Como organizador,<br>- Puedo cargar un evento nuevo con detalles (fecha, lugar, deporte, requisitos),<br>- Para promocionarlo en la plataforma.<br><br>- Criterios de Aceptación:<br>  - Dado que estoy logueado como organizador aprobado,<br>  - Cuando completo el formulario con título, descripción, fecha/hora, deporte, requisitos, imagen,<br>  - Entonces el evento se guarda con estado "pendiente de verificación".<br><br>**Conversación (al reverso)**:<br>- Detalles:<br>  - Reglas de negocio: El evento requiere verificación en <48h; deportes incluyen opciones como fútbol, tejo, parapente.<br>  - Requerimientos no funcionales: Carga de imágenes optimizada (<5MB); tiempo de procesamiento <3 segundos.<br>  - Otros detalles importantes: Integración con Leaflet para geolocalización.<br><br>**Comprobación**: (Se verificará tras desarrollo: formulario funcional, evento guardado, estado pendiente visible.) | Alta       | 8               | ID 2         |
-| 4  | **Nombre**: Verificación de Eventos por Administrador<br><br>**Descripción**:<br>- Nombre Historia: Verificación de Eventos por Administrador<br>- Como administrador,<br>- Puedo verificar y aprobar eventos cargados,<br>- Para asegurar información confiable.<br><br>- Criterios de Aceptación:<br>  - Dado que tengo acceso al dashboard admin,<br>  - Cuando recibo notificación de un nuevo evento,<br>  - Entonces puedo aprobar, rechazar con motivo, o editar en <48h.<br><br>**Conversación (al reverso)**:<br>- Detalles:<br>  - Reglas de negocio: Respuesta obligatoria en <48h; rechazo requiere justificación.<br>  - Requerimientos no funcionales: Notificaciones en tiempo real; dashboard accesible en <1 segundo.<br>  - Otros detalles importantes: Logs de actividad de verificación.<br><br>**Comprobación**: (Se verificará tras desarrollo: notificación recibida, opciones de aprobación/rechazo funcionales, tiempo cumplido.) | Alta       | 5               | ID 3         |
-| 5  | **Nombre**: Búsqueda de Eventos por Usuario<br><br>**Descripción**:<br>- Nombre Historia: Búsqueda de Eventos por Usuario<br>- Como usuario general,<br>- Puedo buscar eventos por deporte, fecha o ubicación,<br>- Para encontrar oportunidades relevantes.<br><br>- Criterios de Aceptación:<br>  - Dado que estoy en la página principal,<br>  - Cuando uso la barra de búsqueda con filtros: deporte, fecha, radio de ubicación,<br>  - Entonces se muestran resultados paginados con previews.<br><br>**Conversación (al reverso)**:<br>- Detalles:<br>  - Reglas de negocio: Filtros deben ser combinables; resultados limitados a 10 por página.<br>  - Requerimientos no funcionales: Tiempo de búsqueda <2 segundos; carga progresiva de resultados.<br>  - Otros detalles importantes: Integración con MongoDB para queries eficientes.<br><br>**Comprobación**: (Se verificará tras desarrollo: filtros funcionales, resultados correctos, paginación operativa.) | Alta       | 8               | ID 4         |
-| 6  | **Nombre**: Mapa Interactivo de Eventos<br><br>**Descripción**:<br>- Nombre Historia: Mapa Interactivo de Eventos<br>- Como usuario general,<br>- Puedo ver un mapa interactivo con eventos geolocalizados,<br>- Para visualizar ubicaciones fácilmente.<br><br>- Criterios de Aceptación:<br>  - Dado que estoy en la página de eventos,<br>  - Cuando se carga el mapa con Leaflet,<br>  - Entonces muestra al menos 10 eventos con markers y popups (detalles).<br><br>**Conversación (al reverso)**:<br>- Detalles:<br>  - Reglas de negocio: Precisión geolocalización ≥90%; markers clicables.<br>  - Requerimientos no funcionales: Carga del mapa <3 segundos; responsive en móviles.<br>  - Otros detalles importantes: Filtros por deporte en el mapa.<br><br>**Comprobación**: (Se verificará tras desarrollo: mapa cargado, 10 eventos visibles, popups funcionales.) | Alta       | 3               | ID 5         |
+- **Como** desarrollador
+- **Quiero** implementar el sistema de autenticación JWT
+- **Para** que usuarios puedan registrarse, loguearse y mantener sesión
 
+**Criterios de Aceptación:**
 
----
+- ✅ Registro con email/password y validación
+- ✅ Login con generación de JWT
+- ✅ Middleware de autenticación para rutas protegidas
+- ✅ Logout y manejo de tokens
+
+##
+### Historia 2: Panel de Administración Principal
+
+**Prioridad:** Crítica | **SP:** 13
+
+- **Como** administrador
+- **Quiero** acceder a un panel completo de administración
+- **Para** gestionar todos los aspectos de la plataforma
+
+**Criterios de Aceptación:**
+
+- ✅ Dashboard con métricas principales (usuarios, eventos, etc.)
+- ✅ Navegación clara entre secciones administrativas
+- ✅ Interfaz responsive y moderna
+- ✅ Acceso solo para usuarios con rol admin
+
+##
+- ### Historia 3: Gestión de Usuarios por Admin
+
+**Prioridad:** Crítica | **SP:** 10
+
+- **Como** administrador
+- **Quiero** gestionar todos los usuarios de la plataforma
+- **Para** aprobar organizadores, suspender usuarios y asignar permisos
+
+**Criterios de Aceptación:**
+
+- ✅ Lista paginada de todos los usuarios
+- ✅ Filtros por rol, estado, provincia
+- ✅ Acciones: aprobar/rechazar organizadores, suspender/activar usuarios
+- ✅ Cambio de roles (promover a admin)
+- ✅ Vista detallada de cada usuario
+
+##
+### Historia 4: Gestión de Permisos de Administradores
+
+**Prioridad:** Alta | **SP:** 8
+
+- **Como** administrador principal
+- **Quiero** asignar permisos específicos a otros administradores
+- **Para** delegar responsabilidades sin dar acceso total
+
+**Criterios de Aceptación:**
+
+- ✅ Sistema de permisos granular
+- ✅ Asignación de permisos por módulo
+- ✅ Super admin con permisos totales
+- ✅ Log de cambios de permisos
+
+##
+## Sprint 2: Sistema de Autenticación Base
